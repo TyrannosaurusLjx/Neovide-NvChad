@@ -71,10 +71,10 @@ return {
     build = ":Copilot auth",
     opts = {
       suggestion = { enabled = true,
-        keymap = {
-          accept = "<F12>",
-          -- 其他键盘快捷键
-        }
+        -- keymap = {
+        --   accept = ">",
+        --   -- 其他键盘快捷键
+        -- }
       },
       panel = { enabled = false },
       filetypes = {
@@ -95,6 +95,7 @@ return {
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
     ft = { "markdown" },
   },
+  
   -- image paste
 -- markdown image paste
   {
@@ -106,8 +107,12 @@ return {
     config = function ()
         require'alpha'.setup(require'alpha.themes.dashboard'.config)
     end
- }
-
+ },
+  {
+    "xiyaowong/transparent.nvim",
+    lazy = false
+  },
+  
 }
 
 

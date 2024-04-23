@@ -31,7 +31,9 @@ require("lazy").setup({
   { import = "plugins" },
 }, lazy_config)
 
-vim.cmd('set guifont=Hack\\ Nerd\\ Font:h18')
+vim.cmd('set guifont=Hack\\ Nerd\\ Font:h17')
+vim.cmd("lua require('copilot.suggestion').toggle_auto_trigger()")
+
 
 -- load theme
 dofile(vim.g.base46_cache .. "defaults")
