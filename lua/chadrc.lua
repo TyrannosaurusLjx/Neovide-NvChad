@@ -5,15 +5,14 @@
 local M = {}
 
 M.ui = {
-	theme = "onedark",
-
+	theme = "onenord",
 	-- hl_override = {
 	-- 	Comment = { italic = true },
 	-- 	["@comment"] = { italic = true },
 	-- },
-  cmp = {
-    preselect = false,
-  }
+--   cmp = {
+--     preselect = false,
+--   }
 }
 
 return M

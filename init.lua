@@ -11,8 +11,6 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
--- auto_session
-vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"
 
 local lazy_config = require "configs.lazy"
 
@@ -31,10 +29,6 @@ require("lazy").setup({
   { import = "plugins" },
 }, lazy_config)
 
-vim.cmd('set guifont=Hack\\ Nerd\\ Font:h17')
-vim.cmd("lua require('copilot.suggestion').toggle_auto_trigger()")
-
-
 -- load theme
 dofile(vim.g.base46_cache .. "defaults")
 dofile(vim.g.base46_cache .. "statusline")
@@ -44,3 +38,12 @@ require "nvchad.autocmds"
 vim.schedule(function()
   require "mappings"
 end)
+
+
+
+-- auto_session
+vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"
+
+vim.cmd('set guifont=Hack\\ Nerd\\ Font:h16')
+vim.cmd("lua require('copilot.suggestion').toggle_auto_trigger()")
+

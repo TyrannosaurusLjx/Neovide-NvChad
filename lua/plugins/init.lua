@@ -108,10 +108,6 @@ return {
         require'alpha'.setup(require'alpha.themes.dashboard'.config)
     end
  },
-  {
-    "xiyaowong/transparent.nvim",
-    lazy = false
-  },
   
 }
 
