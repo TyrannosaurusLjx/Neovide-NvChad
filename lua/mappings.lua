@@ -21,7 +21,7 @@ map("i", "<D-l>", "<Right>")
 map("n", "<D-j>", "3<Down>")
 map("n", "<D-k>", "3<Up>")
 map("n", "<D-h>", "3<Left>")
-map("n", "<D-l>", "3<Rght>")
+map("n", "<D-l>", "3<Right>")
 -- map("v", "<D-j>", "<Down>")
 -- map("v", "<D-k>", "<Up>")
 -- map("v", "<D-h>", "<Left>")
@@ -30,7 +30,7 @@ map("n", "<D-l>", "3<Rght>")
 -- 复制
 map("i", "<D-L>", "<ESC>l<C-v>")
 map("i", "<D-K>", "<ESC>Vk")
-map("i", "<D-H>", "<ESC>V")
+map("i", "<D-H>", "<ESC><C-v>")
 map("i", "<D-J>", "<ESC>V")
 map("v", "<D-L>", "l")
 map("v", "<D-K>", "k")
@@ -65,9 +65,9 @@ map("i", "<D-t>", "<ESC>:enew<CR>")
 map("n", "<D-t>", "<ESC>:enew<CR>")
 
 -- nav buffer
-map("i", "<D-]>", "<ESC>:bNext<CR>",  { noremap = true, silent = true })
+map("i", "<D-]>", "<ESC>:bnext<CR>",  { noremap = true, silent = true })
 map("i", "<D-[>", "<ESC>:bprevious<CR>")
-map("n", "<D-]>", "<ESC>:bNext<CR>")
+map("n", "<D-]>", "<ESC>:bnext<CR>")
 map("n", "<D-[>", "<ESC>:bprevious<CR>")
 
 -- nav split
@@ -128,6 +128,8 @@ map('n', '<D-R>', '<cmd>lua require("auto-session.session-lens").search_session(
 map('n', "<F8>", "<ESC>:MarkdownPreview<CR>")
 map("v", "<D-b>", "s****<ESC>hP")
 
+
+
 -- markdown image paste
 map("n", "<c-p>","<ESC>:call mdip#MarkdownClipboardImage()<CR><ESC>")
 map("i", "<c-p>","<ESC>:call mdip#MarkdownClipboardImage()<CR><ESC>")
@@ -137,4 +139,6 @@ map("i", "<F12>", '<cmd>lua require("copilot.suggestion").accept()<CR>')
 map("i", "<D-F12>", '<cmd>lua require("copilot.suggestion").accept_word()<CR>')
 
 
+-- math $$
+map("i", "jj", "<ESC>A$$<ESC>F$a")
 

@@ -20,8 +20,9 @@ return {
   	"williamboman/mason.nvim",
   	opts = {
   		ensure_installed = {
-  			"lua-language-server", "stylua",
-  			"html-lsp", "css-lsp" , "prettier"
+  			"stylua",
+  			"html-lsp", "css-lsp" , "prettier",
+        "pyright"
   		},
   	},
   },
@@ -95,7 +96,6 @@ return {
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
     ft = { "markdown" },
   },
-  
   -- image paste
 -- markdown image paste
   {
