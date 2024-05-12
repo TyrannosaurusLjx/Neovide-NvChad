@@ -22,6 +22,9 @@ map("n", "<D-j>", "3<Down>")
 map("n", "<D-k>", "3<Up>")
 map("n", "<D-h>", "3<Left>")
 map("n", "<D-l>", "3<Right>")
+map("i", "<D-]>", "<ESC>2ea")
+map("i", "<D-[>", "<ESC>2gea")
+
 -- map("v", "<D-j>", "<Down>")
 -- map("v", "<D-k>", "<Up>")
 -- map("v", "<D-h>", "<Left>")
@@ -36,6 +39,12 @@ map("v", "<D-L>", "l")
 map("v", "<D-K>", "k")
 map("v", "<D-H>", "h")
 map("v", "<D-J>", "j")
+
+-- 向后删除
+map("i", "<D-backspace>", "<Right><backspace>")
+
+-- 新建一行
+map("i", "<D-CR>", "<ESC>o")
 
 
 -- force write
@@ -65,14 +74,14 @@ map("i", "<D-t>", "<ESC>:enew<CR>")
 map("n", "<D-t>", "<ESC>:enew<CR>")
 
 -- nav buffer
-map("i", "<D-]>", "<ESC>:bnext<CR>",  { noremap = true, silent = true })
-map("i", "<D-[>", "<ESC>:bprevious<CR>")
+-- map("i", "<D-]>", "<ESC>:bnext<CR>",  { noremap = true, silent = true })
+-- map("i", "<D-[>", "<ESC>:bprevious<CR>")
 map("n", "<D-]>", "<ESC>:bnext<CR>")
 map("n", "<D-[>", "<ESC>:bprevious<CR>")
 
 -- nav split
-map("i", "<D-}>", "<ESC><C-w><C-w>")
-map("i", "<D-{>", "<ESC><C-w>p")
+-- map("i", "<D-}>", "<ESC><C-w><C-w>")
+-- map("i", "<D-{>", "<ESC><C-w>p")
 map("n", "<D-}>", "<ESC><C-w><C-w>")
 map("n", "<D-{>", "<ESC><C-w>p")
 
@@ -141,4 +150,28 @@ map("i", "<D-F12>", '<cmd>lua require("copilot.suggestion").accept_word()<CR>')
 
 -- math $$
 map("i", "jj", "<ESC>A$$<ESC>F$a")
+
+--flash jump
+map("i", "<D-g>", "<CMD>lua require('flash').jump()<CR>")
+map("n", "<D-g>", "<CMD>lua require('flash').jump()<CR>")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

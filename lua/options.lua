@@ -22,3 +22,5 @@ require "nvchad.options"
   -- vim.g.neovide_light_angle_degrees = 45
   -- vim.g.neovide_light_radius = 5
   vim.g.neovide_remember_window_size = true
+  
+  vim.g.vscode_snippets_path = "/Users/ljx/Library/Application Support/Code/User/profiles/22b61835/snippets/markdown.json"

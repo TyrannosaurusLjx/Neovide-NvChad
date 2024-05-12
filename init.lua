@@ -63,3 +63,6 @@ end
 vim.api.nvim_command([[
     autocmd ModeChanged * lua leave_snippet()
 ]])
+
+-- markdown snippets path 
+
