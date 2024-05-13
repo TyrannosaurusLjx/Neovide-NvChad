@@ -38,5 +38,6 @@
   "ui": { "branch": "v2.5", "commit": "6512f7d1faa4fd86c53e9c5c8492b4bdda692613" },
   "vim-markdown": { "branch": "master", "commit": "a657e697376909c41475a686eeef7fc7a4972d94" },
   "vim-slime": { "branch": "main", "commit": "be64ea6f29754b321b9fa1f1d724b0010d959979" },
+  "vimtex": { "branch": "master", "commit": "8ca74380935beb4ed5d213bb55b2380cc1a83bd6" },
   "which-key.nvim": { "branch": "main", "commit": "4433e5ec9a507e5097571ed55c02ea9658fb268a" }
 }

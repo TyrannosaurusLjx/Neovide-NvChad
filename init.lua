@@ -66,3 +66,4 @@ vim.api.nvim_command([[
 
 -- markdown snippets path 
 
+

@@ -134,10 +134,30 @@ map("n", "<D-r>", "<cmd>Telescope oldfiles<CR>", { desc = "Telescope Find oldfil
 map('n', '<D-R>', '<cmd>lua require("auto-session.session-lens").search_session()<CR>', { noremap = true, silent = true })
 
 -- MarkdownPreview
-map('n', "<F8>", "<ESC>:MarkdownPreview<CR>")
+-- map('n', "<F8>", "<ESC>:MarkdownPreview<CR>")
 map("v", "<D-b>", "s****<ESC>hP")
+-- map('n', '<F8>', '<cmd>lua if vim.bo.filetype == "markdown" then vim.cmd(":MarkdownPreview") end<CR>', { noremap = true, silent = true })
 
-
+-- latex编译
+-- vim.fn.expand('%:p:r') .. ".pdf"
+map('n', '<F8>',function()
+  -- 绝对名
+  -- 父目录
+  local fileDirectory = vim.fn.expand('%:p:h')
+  -- 文件名
+  local filename = vim.fn.fnamemodify(vim.fn.expand('%:p'), ":t:r")
+  --编译到当前目录下
+  local cmd = string.format("w| !xelatex -output-directory=%s %s",fileDirectory, vim.fn.expand('%:p'))
+  -- 编译
+  if vim.bo.filetype == "markdown" then
+    vim.cmd(":MarkdownPreview")
+  elseif vim.bo.filetype == "tex" then
+    vim.cmd(cmd)
+  else
+    print("Unknown file type")
+  end
+end, { noremap = true, silent = true }
+)
 
 -- markdown image paste
 map("n", "<c-p>","<ESC>:call mdip#MarkdownClipboardImage()<CR><ESC>")
