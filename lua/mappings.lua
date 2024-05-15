@@ -5,10 +5,9 @@ require "nvchad.mappings"
 local map = vim.keymap.set
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
-map("i", "jk", "<ESC>")
+map("i", "jk", "<ESC>:!/opt/homebrew/bin/im-select com.apple.keylayout.ABC<CR>")
 
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
-
 
 
 -- 移动映射
@@ -62,8 +61,12 @@ map("n", "//", "<ESC>:noh<CR>")
 map("n", "<leader>n", ":n ")
 
 -- buffer close
-map("i", "<D-w>", "<ESC>:bd<CR>")
-map("n", "<D-w>", "<ESC>:bd<CR>")
+-- map("i", "<D-w>", "<ESC>:bd<CR>")
+-- map("n", "<D-w>", "<ESC>:bd<CR>")
+map("i", "<D-w>", "<CMD>lua require('bufdelete').bufdelete(0, true)<CR>")
+map("n", "<D-w>", "<CMD>lua require('bufdelete').bufdelete(0, true)<CR>")
+
+
 
 -- new window(tab)
 map("i", "<D-n>", "<ESC>:tabnew<CR>")
@@ -158,6 +161,21 @@ map('n', '<F8>',function()
   end
 end, { noremap = true, silent = true }
 )
+
+
+-- map $ 但是插入两个 $$ 的时候也没用
+map("i", "$", function ()
+  if vim.g.im_select_value == 1 then
+    vim.cmd("!/opt/homebrew/bin/im-select com.tencent.inputmethod.wetype.pinyin")
+    vim.g.im_select_value = 2
+  else
+    vim.cmd("!/opt/homebrew/bin/im-select com.apple.keylayout.ABC")
+    vim.g.im_select_value = 1
+  end
+  vim.api.nvim_feedkeys("$", "n", true)
+end,{noremap = true,silent = true})
+
+
 
 -- markdown image paste
 map("n", "<c-p>","<ESC>:call mdip#MarkdownClipboardImage()<CR><ESC>")

@@ -64,6 +64,6 @@ vim.api.nvim_command([[
     autocmd ModeChanged * lua leave_snippet()
 ]])
 
--- markdown snippets path 
-
+-- 输入法切换
+vim.g.im_select_value = 1
 
