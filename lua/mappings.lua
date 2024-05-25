@@ -5,7 +5,7 @@ require "nvchad.mappings"
 local map = vim.keymap.set
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
-map("i", "jk", "<ESC>:!/opt/homebrew/bin/im-select com.apple.keylayout.ABC<CR>")
+map("i", "jk", "<ESC>:!/opt/homebrew/bin/im-select com.apple.keylayout.ABC<CR>",{noremap = true,silent = true})
 
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 
@@ -34,9 +34,9 @@ map("i", "<D-L>", "<ESC>l<C-v>")
 map("i", "<D-K>", "<ESC>Vk")
 map("i", "<D-H>", "<ESC><C-v>")
 map("i", "<D-J>", "<ESC>V")
-map("v", "<D-L>", "l")
+map("v", "<D-L>", "2l")
 map("v", "<D-K>", "k")
-map("v", "<D-H>", "h")
+map("v", "<D-H>", "2h")
 map("v", "<D-J>", "j")
 
 -- 向后删除
@@ -47,8 +47,8 @@ map("i", "<D-CR>", "<ESC>o")
 
 
 -- force write
-map("i", "<D-s>", "<ESC>:w<CR>")
-map("n", "<D-s>", "<ESC>:w<CR>")
+map("i", "<D-s>", "<ESC>:w<CR>",{noremap = true,silent = true})
+map("n", "<D-s>", "<ESC>:w<CR>",{noremap = true,silent = true})
 
 -- force quite
 map("n", "<D-q>", "<ESC>:wq!")
@@ -63,9 +63,8 @@ map("n", "<leader>n", ":n ")
 -- buffer close
 -- map("i", "<D-w>", "<ESC>:bd<CR>")
 -- map("n", "<D-w>", "<ESC>:bd<CR>")
-map("i", "<D-w>", "<CMD>lua require('bufdelete').bufdelete(0, true)<CR>")
-map("n", "<D-w>", "<CMD>lua require('bufdelete').bufdelete(0, true)<CR>")
-
+map("i", "<D-w>", "<ESC>w<CR><CMD>lua require('bufdelete').bufdelete(0, true)<CR>",{noremap = true,silent = true})
+map("n", "<D-w>", "<ESC>w<CMD>lua require('bufdelete').bufdelete(0, true)<CR>",{noremap = true,silent = true})
 
 
 -- new window(tab)
@@ -129,7 +128,6 @@ map("n", "<D-a>", "<ESC>ggVG")
 
 -- bookmark
 map("n", "<D-m>", "<CMD>lua require'bookmarks'.add_bookmarks(true)<CR>")
-
 -- Telescope
 map("n", "<D-r>", "<cmd>Telescope oldfiles<CR>", { desc = "Telescope Find oldfiles" })
 
@@ -138,7 +136,7 @@ map('n', '<D-R>', '<cmd>lua require("auto-session.session-lens").search_session(
 
 -- MarkdownPreview
 -- map('n', "<F8>", "<ESC>:MarkdownPreview<CR>")
-map("v", "<D-b>", "s****<ESC>hP")
+map("v", "<D-b>", "s****<ESC>hP",{noremap = true,silent = true})
 -- map('n', '<F8>', '<cmd>lua if vim.bo.filetype == "markdown" then vim.cmd(":MarkdownPreview") end<CR>', { noremap = true, silent = true })
 
 -- latex编译
@@ -162,37 +160,59 @@ map('n', '<F8>',function()
 end, { noremap = true, silent = true }
 )
 
+-- -- map $ 但是插入两个 $$ 的时候也没用
+-- map("i", "$", function ()
+--   -- local en = "com.tencent.inputmethod.wetype.pinyin"
+--   -- local zh = "com.apple.keylayout.ABC"
+--   -- local line = vim.fn.line('.') -- 行
+--   -- local col = vim.fn.col('.') -- 列
+--   -- local pre_char = string.sub(line,col-1,col-1)
+--   -- local pre_char_2 = string.sub(line,col-2,col-2)
 
--- map $ 但是插入两个 $$ 的时候也没用
-map("i", "$", function ()
-  if vim.g.im_select_value == 1 then
-    vim.cmd("!/opt/homebrew/bin/im-select com.tencent.inputmethod.wetype.pinyin")
-    vim.g.im_select_value = 2
-  else
-    vim.cmd("!/opt/homebrew/bin/im-select com.apple.keylayout.ABC")
-    vim.g.im_select_value = 1
-  end
-  vim.api.nvim_feedkeys("$", "n", true)
-end,{noremap = true,silent = true})
+--   -- local isEn = false
 
+--   -- if string.match(pre_char_2, "[a-zA-Z]") then
+--   --   isEn = true
+--   -- else
+--   --   isEn = false
+--   -- end
 
+--   -- if isEn then  
+--   --   -- 不执行任何操作  
+--   -- else  
+--   --   if pre_char == " " then  
+--   --     vim.cmd("!im-select " .. en)  
+--   --   end  
+--   -- end  
+
+--   -- vim.api.nvim_feedkeys("$", "n", true)
+ 
+--   if vim.g.im_select_value == 1 then
+--     vim.cmd("!/opt/homebrew/bin/im-select com.tencent.inputmethod.wetype.pinyin")
+--     vim.g.im_select_value = 2
+--   else
+--     vim.cmd("!/opt/homebrew/bin/im-select com.apple.keylayout.ABC")
+--     vim.g.im_select_value = 1
+--   end
+--   vim.api.nvim_feedkeys("$", "n", true)
+
+-- end,{noremap = true,silent = true})
 
 -- markdown image paste
-map("n", "<c-p>","<ESC>:call mdip#MarkdownClipboardImage()<CR><ESC>")
-map("i", "<c-p>","<ESC>:call mdip#MarkdownClipboardImage()<CR><ESC>")
+map("n", "<c-p>","<ESC>:call mdip#MarkdownClipboardImage()<CR><ESC>",{noremap = true,silent = true})
+map("i", "<c-p>","<ESC>:call mdip#MarkdownClipboardImage()<CR><ESC>",{noremap = true,silent = true})
 
 -- copilot.lua accept
-map("i", "<F12>", '<cmd>lua require("copilot.suggestion").accept()<CR>')
-map("i", "<D-F12>", '<cmd>lua require("copilot.suggestion").accept_word()<CR>')
+map("i", "<F12>", '<cmd>lua require("copilot.suggestion").accept()<CR>',{noremap = true,silent = true})
+map("i", "<D-F12>", '<cmd>lua require("copilot.suggestion").accept_word()<CR>',{noremap = true,silent = true})
 
 
 -- math $$
-map("i", "jj", "<ESC>A$$<ESC>F$a")
+map("i", "jj", "<ESC>A$$<ESC>F$a",{noremap = true,silent = true})
 
 --flash jump
 map("i", "<D-g>", "<CMD>lua require('flash').jump()<CR>")
 map("n", "<D-g>", "<CMD>lua require('flash').jump()<CR>")
-
 
 
 

@@ -24,7 +24,7 @@ return{
     logo = string.rep("\n", 4) .. logo .. "\n\n"
 
     local opts = {
-      theme = "doom",--or hyper
+      theme = "doom",--or hyper doom
       hide = {
         -- this is taken care of by lualine
         -- enabling this messes up the actual laststatus setting after loading a file
