@@ -208,11 +208,12 @@ map("i", "<D-F12>", '<cmd>lua require("copilot.suggestion").accept_word()<CR>',{
 
 
 -- math $$
-map("i", "jj", "<ESC>A$$<ESC>F$a",{noremap = true,silent = true})
+-- map("i", "jj", "<ESC>A$$<ESC>F$a",{noremap = true,silent = true})
 
 --flash jump
-map("i", "<D-g>", "<CMD>lua require('flash').jump()<CR>")
-map("n", "<D-g>", "<CMD>lua require('flash').jump()<CR>")
+map("i", "ff", "<CMD>lua require('flash').jump()<CR>")
+map("n", "ff", "<CMD>lua require('flash').jump()<CR>")
+
 
 
 
