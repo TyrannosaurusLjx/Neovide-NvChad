@@ -41,7 +41,7 @@ return{
             require("auto-session.session-lens").search_session()
           end,
           desc = " Workspace" , icon = "⚔︎ ", key = "g"},
-          { action = "LazyExtras",                                               desc = " Lazy Extras",     icon = " ", key = "x" },
+          -- { action = "LazyExtras",                                               desc = " Lazy Extras",     icon = " ", key = "x" },
           { action = "Lazy",                                                     desc = " Lazy",            icon = "󰒲 ", key = "l" },
           { action = "qa",                                                       desc = " Quit",            icon = " ", key = "q" },
         },

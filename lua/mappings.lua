@@ -30,14 +30,14 @@ map("i", "<D-[>", "<ESC>2gea")
 -- map("v", "<D-l>", "<Right>")
 
 -- 复制
-map("i", "<D-L>", "<ESC>l<C-v>")
-map("i", "<D-K>", "<ESC>Vk")
-map("i", "<D-H>", "<ESC><C-v>")
-map("i", "<D-J>", "<ESC>V")
-map("v", "<D-L>", "2l")
-map("v", "<D-K>", "k")
-map("v", "<D-H>", "2h")
-map("v", "<D-J>", "j")
+-- map("i", "<D-L>", "<ESC>l<C-v>")
+-- map("i", "<D-K>", "<ESC>Vk")
+-- map("i", "<D-H>", "<ESC><C-v>")
+-- map("i", "<D-J>", "<ESC>V")
+-- map("v", "<D-L>", "2l")
+-- map("v", "<D-K>", "k")
+-- map("v", "<D-H>", "2h")
+-- map("v", "<D-J>", "j")
 
 -- 向后删除
 map("i", "<D-backspace>", "<Right><backspace>")
@@ -196,7 +196,7 @@ end, { noremap = true, silent = true }
 --   end
 --   vim.api.nvim_feedkeys("$", "n", true)
 
--- end,{noremap = true,silent = true})
+-- end,{noremsap = true,silent = true})
 
 -- markdown image paste
 map("n", "<c-p>","<ESC>:call mdip#MarkdownClipboardImage()<CR><ESC>",{noremap = true,silent = true})
@@ -211,8 +211,8 @@ map("i", "<D-F12>", '<cmd>lua require("copilot.suggestion").accept_word()<CR>',{
 -- map("i", "jj", "<ESC>A$$<ESC>F$a",{noremap = true,silent = true})
 
 --flash jump
-map("i", "ff", "<CMD>lua require('flash').jump()<CR>")
-map("n", "ff", "<CMD>lua require('flash').jump()<CR>")
+map("i", "<D-g>", "<CMD>lua require('flash').jump()<CR>")
+map("n", "<D-g>", "<CMD>lua require('flash').jump()<CR>")
 
 
 
