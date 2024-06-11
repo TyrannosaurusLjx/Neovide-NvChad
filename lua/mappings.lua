@@ -68,7 +68,7 @@ map("n", "<D-w>", "<ESC>w<CMD>lua require('bufdelete').bufdelete(0, true)<CR>",{
 
 
 -- new window(tab)
-map("i", "<D-n>", "<ESC>:tabnew<CR>")
+-- map("i", "<D-n>", "<ESC>:tabnew<CR>")
 map("n", "<D-n>", "<ESC>:tabnew<CR>")
 
 -- new buffer
@@ -146,7 +146,7 @@ map('n', '<F8>',function()
   -- 父目录
   local fileDirectory = vim.fn.expand('%:p:h')
   -- 文件名
-  local filename = vim.fn.fnamemodify(vim.fn.expand('%:p'), ":t:r")
+  -- local filename = vim.fn.fnamemodify(vim.fn.expand('%:p'), ":t:r")
   --编译到当前目录下
   local cmd = string.format("w| !xelatex -output-directory=%s %s",fileDirectory, vim.fn.expand('%:p'))
   -- 编译
@@ -186,7 +186,6 @@ end, { noremap = true, silent = true }
 --   -- end  
 
 --   -- vim.api.nvim_feedkeys("$", "n", true)
- 
 --   if vim.g.im_select_value == 1 then
 --     vim.cmd("!/opt/homebrew/bin/im-select com.tencent.inputmethod.wetype.pinyin")
 --     vim.g.im_select_value = 2
@@ -213,14 +212,6 @@ map("i", "<D-F12>", '<cmd>lua require("copilot.suggestion").accept_word()<CR>',{
 --flash jump
 map("i", "<D-g>", "<CMD>lua require('flash').jump()<CR>")
 map("n", "<D-g>", "<CMD>lua require('flash').jump()<CR>")
-
-
-
-
-
-
-
-
 
 
 
