@@ -59,6 +59,9 @@ map("n", "//", "<ESC>:noh<CR>")
 
 -- New file
 map("n", "<leader>n", ":n ")
+-- open file
+map("n", "<D-o>", ":e ")
+map("n", "<D-O>", ":tcd ")
 
 -- buffer close
 -- map("i", "<D-w>", "<ESC>:bd<CR>")
@@ -80,9 +83,12 @@ map("n", "<D-t>", "<ESC>:enew<CR>")
 -- map("i", "<D-[>", "<ESC>:bprevious<CR>")
 map("n", "<D-]>", "<ESC>:bnext<CR>")
 map("n", "<D-[>", "<ESC>:bprevious<CR>")
+map("n", "<tab>", ":buffer ")
+
+
+
 
 -- nav split
--- map("i", "<D-}>", "<ESC><C-w><C-w>")
 -- map("i", "<D-{>", "<ESC><C-w>p")
 map("n", "<D-}>", "<ESC><C-w><C-w>")
 map("n", "<D-{>", "<ESC><C-w>p")
@@ -126,8 +132,11 @@ map("v", "<D-c>", "y")
 map("i", "<D-a>", "<ESC>ggVG")
 map("n", "<D-a>", "<ESC>ggVG")
 
--- bookmark
+-- bookmark https://github.com/crusj/bookmarks.nvim
 map("n", "<D-m>", "<CMD>lua require'bookmarks'.add_bookmarks(true)<CR>")
+map("n", "<leader>m", "<CMD>lua require'bookmarks'.toggle_bookmarks()<CR>")
+
+
 -- Telescope
 map("n", "<D-r>", "<cmd>Telescope oldfiles<CR>", { desc = "Telescope Find oldfiles" })
 

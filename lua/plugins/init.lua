@@ -27,20 +27,20 @@ return {
   	},
   },
 
-  {
-  	"nvim-treesitter/nvim-treesitter",
-  	opts = {
-  		ensure_installed = {
-  			"vim", "lua", "vimdoc",
-       "html", "css"
-  		},
-  	},
-  },
+  -- {
+  -- 	"nvim-treesitter/nvim-treesitter",
+  -- 	opts = {
+  -- 		ensure_installed = {
+  -- 			"vim", "lua", "vimdoc",
+  --      "html", "css"
+  -- 		},
+  -- 	},
+  -- },
   -- bookmarks
   {
       'crusj/bookmarks.nvim',
       keys = {
-          { "<tab><tab>", mode = { "n" } },
+          -- { "<leader>", mode = { "n" } },
       },
       branch = 'main',
       dependencies = { 'nvim-web-devicons' },

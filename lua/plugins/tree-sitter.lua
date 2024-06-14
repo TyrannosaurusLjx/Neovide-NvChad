@@ -19,23 +19,20 @@
 --   end
 -- }
 
-
 return{
 
   'nvim-treesitter/nvim-treesitter',
-  lazy =false,
+  lazy = false,
   config = function ()
     require("nvim-treesitter.configs").setup({
 
       ensure_installed = {"c", "latex", "lua", "vim", "javascript", "html", "python", "markdown"},
-      sync_install = true,
-      auto_install = true,
+      -- sync_install = true,
+      -- auto_install = true,
       highlight = {
         enable = true,
 
-      }
-
-
+      },
     })
   end
 
