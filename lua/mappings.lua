@@ -1,13 +1,29 @@
 require "nvchad.mappings"
+--Nvchad 映射文件
+--https://github.com/NvChad/NvChad/blob/v2.5/lua/nvchad/mappings.lua
 
 -- add yours here
-
 local map = vim.keymap.set
+local nomap = vim.keymap.del
+
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
-map("i", "jk", "<ESC>:!/opt/homebrew/bin/im-select com.apple.keylayout.ABC<CR>",{noremap = true,silent = true})
 
--- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
+-- 命令模式下粘贴
+-- https://stackoverflow.com/questions/3997078/how-to-paste-yanked-text-into-the-vim-command-line
+map("c", "<D-v>", "<C-r>+")
+-- 终端接受补全
+map("t", "<F12>", "<Right>")
+map("t", "<D-F12>", "<C-Right>")
+-- 命令模式下上下
+map("c", "<D-j>", "<Down>")
+map("c", "<D-k>", "<Up>")
+-- 命令模式下左右
+map("c", "<D-h>", "<Left>")
+map("c", "<D-l>", "<Right>")
+
+
+map("i", "jk", "<ESC>:!/opt/homebrew/bin/im-select com.apple.keylayout.ABC<CR>",{noremap = true,silent = true})
 
 
 -- 移动映射
@@ -23,8 +39,14 @@ map("n", "<D-h>", "3<Left>")
 map("n", "<D-l>", "3<Right>")
 map("i", "<D-]>", "<ESC>2ea")
 map("i", "<D-[>", "<ESC>2gea")
+map("v", "<D-j>", "<Down>")
 
--- map("v", "<D-j>", "<Down>")
+map("n", "K", "<C-b>")
+map("n", "J", "<C-f>")
+map("n", "H", "0")
+map("n", "L", "$")
+
+
 -- map("v", "<D-k>", "<Up>")
 -- map("v", "<D-h>", "<Left>")
 -- map("v", "<D-l>", "<Right>")
@@ -51,7 +73,7 @@ map("i", "<D-s>", "<ESC>:w<CR>",{noremap = true,silent = true})
 map("n", "<D-s>", "<ESC>:w<CR>",{noremap = true,silent = true})
 
 -- force quite
-map("n", "<D-q>", "<ESC>:wq!")
+-- map("n", "<D-q>", "<ESC>:wq<CR>")
 
 -- clear search
 map("n", "//", "<ESC>:noh<CR>")
@@ -60,38 +82,42 @@ map("n", "//", "<ESC>:noh<CR>")
 -- New file
 map("n", "<leader>n", ":n ")
 -- open file
-map("n", "<D-o>", ":e ")
+map("n", "<D-o>", ':Triptych<CR>', { silent = true })
 map("n", "<D-O>", ":tcd ")
 
 -- buffer close
 -- map("i", "<D-w>", "<ESC>:bd<CR>")
 -- map("n", "<D-w>", "<ESC>:bd<CR>")
-map("i", "<D-w>", "<ESC>w<CR><CMD>lua require('bufdelete').bufdelete(0, true)<CR>",{noremap = true,silent = true})
+-- map("i", "<D-w>", "<ESC>w<CR><CMD>lua require('bufdelete').bufdelete(0, true)<CR>",{noremap = true,silent = true})
 map("n", "<D-w>", "<ESC>w<CMD>lua require('bufdelete').bufdelete(0, true)<CR>",{noremap = true,silent = true})
 
 
 -- new window(tab)
 -- map("i", "<D-n>", "<ESC>:tabnew<CR>")
-map("n", "<D-n>", "<ESC>:tabnew<CR>")
+-- map("n", "<D-n>", "<ESC>:tabnew<CR>")
 
 -- new buffer
-map("i", "<D-t>", "<ESC>:enew<CR>")
-map("n", "<D-t>", "<ESC>:enew<CR>")
+-- map("i", "<D-t>", "<ESC>:enew<CR>")
+-- map("n", "<D-t>", "<ESC>:enew<CR>")
+
+
 
 -- nav buffer
 -- map("i", "<D-]>", "<ESC>:bnext<CR>",  { noremap = true, silent = true })
 -- map("i", "<D-[>", "<ESC>:bprevious<CR>")
-map("n", "<D-]>", "<ESC>:bnext<CR>")
-map("n", "<D-[>", "<ESC>:bprevious<CR>")
-map("n", "<tab>", ":buffer ")
+map("n", "<D-]>", "<ESC>:bnext<CR>",{silent=true})
+map("n", "<D-[>", "<ESC>:bprevious<CR>",{silent=true})
 
-
-
+for i = 1, 9, 1 do
+  map("n", string.format("<D-%s>", i), function()
+    vim.api.nvim_set_current_buf(vim.t.bufs[i])
+  end)
+end
 
 -- nav split
 -- map("i", "<D-{>", "<ESC><C-w>p")
-map("n", "<D-}>", "<ESC><C-w><C-w>")
-map("n", "<D-{>", "<ESC><C-w>p")
+map("n", "<D-}>", "<ESC><C-w><C-w>",{silent=true})
+map("n", "<D-{>", "<ESC><C-w>p",{silent=true})
 
 -- comment
 map("n", "<D-/>", function()
@@ -107,33 +133,59 @@ map(
 
 -- nvimtree
 map("n", "<D-e>", "<cmd>NvimTreeToggle<CR>", { desc = "Nvimtree Toggle window" })
+map("n", "<D-E>", "<CMD>Telescope buffers<CR>")
 
 -- terminal
+map("n", "<D-t>", function()
+  require("nvchad.term").toggle { pos = "float", size = 0.3 }
+end, { desc = "Creat Float Terminal" })
+
 map("n", "<C-`>", function()
-  require("nvchad.term").new { pos = "sp", size = 0.3 }
-end, { desc = "Terminal New horizontal term" })
+  require("nvchad.term").toggle { pos = "sp" , size = 0.25 }
+end, { desc = "Creat horizon Terminal" })
+
+-- 隐藏 terminal,关闭的话就 exit
+map("t", "<ESC>",function ()
+  vim.api.nvim_input('<C-\\><C-N>')
+  require('nvchad.tabufline').close_buffer()
+end,{noremap = true, silent = true})
 
 -- search
-map("i", "<D-f>", "<ESC>/")
-map("n", "<D-f>", "<ESC>/")
+-- map("i", "<D-f>", "<ESC>/")
+-- map("n", "<D-f>", "<ESC>/")
+-- 用 Telescope
+map("n", "<D-f>", function ()
+  vim.cmd(":Telescope current_buffer_fuzzy_find")
+end)
+
+
+map("n", "<D-F>", "<CMD>Telescope live_grep<CR>")
+
+
 
 -- undo
-map("i", "<D-z>", "<CMD>:undo<CR>")
-map("i", "<D-Z>", "<CMD>:redo<CR>")
-map("n", "<D-z>", "<CMD>:undo<CR>")
-map("n", "<D-Z>", "<CMD>:redo<CR>")
+map("i", "<D-z>", "<CMD>:undo<CR>",{silent=true})
+map("i", "<D-Z>", "<CMD>:redo<CR>",{silent=true})
+map("n", "<D-z>", "<CMD>:undo<CR>",{silent=true})
+map("n", "<D-Z>", "<CMD>:redo<CR>",{silent=true})
 
 -- copy and paste
-map("i", "<D-v>", "<ESC>pi")
+map("i", "<D-v>", "<C-r>+")
 map("n", "<D-v>", "<ESC>p")
 map("v", "<D-c>", "y")
+-- 显示 registers
+-- map("i","<D-r>","<CMD>lua require('telescope.builtin').registers(require('telescope.themes').get_cursor())<CR>")
+map("i", "<D-r>" , function ()
+  vim.api.nvim_input("<C-r>")
+end)
+
 
 -- select all
 map("i", "<D-a>", "<ESC>ggVG")
 map("n", "<D-a>", "<ESC>ggVG")
 
 -- bookmark https://github.com/crusj/bookmarks.nvim
-map("n", "<D-m>", "<CMD>lua require'bookmarks'.add_bookmarks(true)<CR>")
+map("n", "m", "<CMD>lua require'bookmarks'.add_bookmarks(true)<CR>")
 map("n", "<leader>m", "<CMD>lua require'bookmarks'.toggle_bookmarks()<CR>")
 
 
@@ -147,6 +199,9 @@ map('n', '<D-R>', '<cmd>lua require("auto-session.session-lens").search_session(
 -- map('n', "<F8>", "<ESC>:MarkdownPreview<CR>")
 map("v", "<D-b>", "s****<ESC>hP",{noremap = true,silent = true})
 -- map('n', '<F8>', '<cmd>lua if vim.bo.filetype == "markdown" then vim.cmd(":MarkdownPreview") end<CR>', { noremap = true, silent = true })
+
+map("n", "<leader>mp",":RenderMarkdownToggle<CR>")
+
 
 -- latex编译
 -- vim.fn.expand('%:p:r') .. ".pdf"
@@ -213,6 +268,7 @@ map("i", "<c-p>","<ESC>:call mdip#MarkdownClipboardImage()<CR><ESC>",{noremap = 
 -- copilot.lua accept
 map("i", "<F12>", '<cmd>lua require("copilot.suggestion").accept()<CR>',{noremap = true,silent = true})
 map("i", "<D-F12>", '<cmd>lua require("copilot.suggestion").accept_word()<CR>',{noremap = true,silent = true})
+map("i", "<D-m>", '<cmd>lua require("copilot.suggestion").accept_word()<CR>',{noremap = true,silent = true})
 
 
 -- math $$
@@ -223,14 +279,18 @@ map("i", "<D-g>", "<CMD>lua require('flash').jump()<CR>")
 map("n", "<D-g>", "<CMD>lua require('flash').jump()<CR>")
 
 
+-- 一些个人设置
+map("n", "<leader>set", function ()
+  local NvimTreeSize = 25
+  vim.cmd("NvimTreeResize " .. NvimTreeSize)
+  print("the NvimTree size is " .. NvimTreeSize)
+end)
 
+-- cmp 快捷键
+map("i", "<D-n>", "<C-n>")
 
-
-
-
-
-
-
-
-
+-- Telescope lsp_defination
+map("n", "gd", "<CMD>Telescope lsp_definitions<CR>")
+map("n", "gr", "<CMD>Telescope lsp_references<CR>")
+vim.api.nvim_command("command! History :Telescope command_history")
 

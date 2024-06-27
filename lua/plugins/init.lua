@@ -66,6 +66,13 @@ return {
       require("auto-session").setup(opts)
     end,
   },
+ --  {
+ --  'rmagatti/session-lens',
+ --  requires = {'rmagatti/auto-session', 'nvim-telescope/telescope.nvim'},
+ --  config = function()
+ --    require('session-lens').setup({--[[your custom config--]]})
+ --  end
+ -- },
   {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
@@ -91,7 +98,7 @@ return {
     build = function() vim.fn["mkdp#util#install"]() end,
     init = function()
       vim.g.mkdp_filetypes = { "markdown" }
-      vim.g.mkdp_browser = "safari"
+      vim.g.mkdp_browser = "vivaldi"
     end,
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
     ft = { "markdown" },
@@ -108,6 +115,20 @@ return {
         require'alpha'.setup(require'alpha.themes.dashboard'.config)
     end
  },
+ {
+      "vhyrro/luarocks.nvim",
+      priority = 1001, -- this plugin needs to run before anything else
+      opts = {
+          rocks = { "magick" },
+      },
+  },
+  {
+      "3rd/image.nvim",
+      dependencies = { "luarocks.nvim" },
+      config = function()
+          require("image").setup({})-- ...
+      end
+  }
 }
 
 

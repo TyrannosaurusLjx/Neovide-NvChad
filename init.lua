@@ -14,6 +14,13 @@ vim.opt.rtp:prepend(lazypath)
 
 local lazy_config = require "configs.lazy"
 
+-- 添加 vscode 的配置 (但是还什么都没有,有空再搞吧)
+if vim.g.vscode then
+
+else
+
+
+
 -- load plugins
 require("lazy").setup({
   {
@@ -67,3 +74,7 @@ vim.api.nvim_command([[
 -- 输入法切换
 vim.g.im_select_value = 1
 
+
+
+
+end
