@@ -51,7 +51,7 @@ end)
 -- auto_session
 vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"
 
-vim.cmd('set guifont=Hack\\ Nerd\\ Font:h16')
+vim.cmd('set guifont=Hack\\ Nerd\\ Font:h16:i')
 vim.cmd("lua require('copilot.suggestion').toggle_auto_trigger()")
 vim.cmd("set scrolloff=15")
 
@@ -74,7 +74,24 @@ vim.api.nvim_command([[
 -- 输入法切换
 vim.g.im_select_value = 1
 
+-- undo file 
+vim.opt.undofile = true
+vim.opt.undodir = vim.fn.stdpath('data') .. '/undo'
 
+-- 启用 Neovide 的连字功能
+vim.g.neovide_cursor_vfx_mode = "ripple"  -- 选择你喜欢的效果 sonicboom, ripple
+vim.g.neovide_font_features = "liga"  -- 启用连字
 
+-- 显示边框
+vim.g.neovide_show_border = true
+
+-- 光标闪烁
+vim.g.neovide_cursor_smooth_blink = true
+
+-- 启用持久化 undo
+vim.opt.undofile = true
+
+-- 设置 undo 文件目录
+vim.opt.undodir = os.getenv("HOME") .. "/.config/nvim/undodir"
 
 end

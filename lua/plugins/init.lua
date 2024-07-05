@@ -98,7 +98,7 @@ return {
     build = function() vim.fn["mkdp#util#install"]() end,
     init = function()
       vim.g.mkdp_filetypes = { "markdown" }
-      vim.g.mkdp_browser = "vivaldi"
+      vim.g.mkdp_browser = "safari"
     end,
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
     ft = { "markdown" },

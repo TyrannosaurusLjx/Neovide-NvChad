@@ -24,7 +24,7 @@ map("c", "<D-l>", "<Right>")
 
 
 map("i", "jk", "<ESC>:!/opt/homebrew/bin/im-select com.apple.keylayout.ABC<CR>",{noremap = true,silent = true})
-
+map("i", "<ESC>", "<ESC>:!/opt/homebrew/bin/im-select com.apple.keylayout.ABC<CR>",{noremap = true,silent = true})
 
 -- 移动映射
 map("n", "j", "jzz")
@@ -170,7 +170,35 @@ map("n", "<D-z>", "<CMD>:undo<CR>",{silent=true})
 map("n", "<D-Z>", "<CMD>:redo<CR>",{silent=true})
 
 -- copy and paste
-map("i", "<D-v>", "<C-r>+")
+
+
+map("i", "<D-v>", function ()
+  -- 检查剪贴板内容是否为图片
+  local function is_clipboard_image()
+      -- 使用 pbpaste 获取剪贴板内容并存储在临时文件中
+      local tmp_file = "/tmp/nvim_clipboard_content"
+      os.execute('pbpaste > ' .. tmp_file)
+      -- 使用 file 命令检查文件类型
+      local handle = io.popen('file ' .. tmp_file)
+      local result = handle:read("*a")
+      handle:close()
+      -- 判断文件类型是否为图片
+      if result:match("text") then
+          return false
+      else
+          return true
+      end
+  end
+
+  if is_clipboard_image() then
+    vim.cmd(":call mdip#MarkdownClipboardImage()")
+  else
+    vim.api.nvim_input("<ESC>p")
+  end
+
+end)
+
+-- map("i", "<D-v>", "<C-r>+")
 map("n", "<D-v>", "<ESC>p")
 map("v", "<D-c>", "y")
 -- 显示 registers
@@ -262,8 +290,8 @@ end, { noremap = true, silent = true }
 -- end,{noremsap = true,silent = true})
 
 -- markdown image paste
-map("n", "<c-p>","<ESC>:call mdip#MarkdownClipboardImage()<CR><ESC>",{noremap = true,silent = true})
-map("i", "<c-p>","<ESC>:call mdip#MarkdownClipboardImage()<CR><ESC>",{noremap = true,silent = true})
+-- map("n", "<c-p>","<ESC>:call mdip#MarkdownClipboardImage()<CR><ESC>",{noremap = true,silent = true})
+-- map("i", "<c-p>","<ESC>:call mdip#MarkdownClipboardImage()<CR><ESC>",{noremap = true,silent = true})
 
 -- copilot.lua accept
 map("i", "<F12>", '<cmd>lua require("copilot.suggestion").accept()<CR>',{noremap = true,silent = true})
@@ -290,7 +318,10 @@ end)
 map("i", "<D-n>", "<C-n>")
 
 -- Telescope lsp_defination
-map("n", "gd", "<CMD>Telescope lsp_definitions<CR>")
-map("n", "gr", "<CMD>Telescope lsp_references<CR>")
+map("n", "<leader>gd", "<CMD>Telescope lsp_definitions<CR>")
+map("n", "<leader>gr", "<CMD>Telescope lsp_references<CR>")
 vim.api.nvim_command("command! History :Telescope command_history")
+map("n", "?", "<CMD>Noice telescope<CR>")
+
+
 

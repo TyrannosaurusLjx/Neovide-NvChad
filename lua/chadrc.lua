@@ -5,7 +5,7 @@
 local M = {}
 
 M.ui = {
-	theme = "everforest",
+	theme = "gruvchad",
 	-- hl_override = {
 	-- 	Comment = { italic = true },
 	-- 	["@comment"] = { italic = true },
@@ -13,6 +13,9 @@ M.ui = {
 --   cmp = {
 --     preselect = false,
 --   }
+  statusline = {
+    theme = "minimal"
+  }
 }
 
 return M
