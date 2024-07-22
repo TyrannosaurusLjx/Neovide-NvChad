@@ -1,2 +1,2 @@
 # Neovide-NcChad
-Neovide with NvChad configuration
+(Neovide) with NvChad configuration

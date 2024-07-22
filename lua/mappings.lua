@@ -11,10 +11,10 @@ map("n", ";", ":", { desc = "CMD enter command mode" })
 
 -- 命令模式下粘贴
 -- https://stackoverflow.com/questions/3997078/how-to-paste-yanked-text-into-the-vim-command-line
-map("c", "<D-v>", "<C-r>+")
+map("c", "<D-v>", "<C-r>+",{noremap = true,silent = true})
 -- 终端接受补全
-map("t", "<F12>", "<Right>")
-map("t", "<D-F12>", "<C-Right>")
+map("t", "<F12>", "<Right>",{noremap = true,silent = true})
+map("t", "<D-F12>", "<C-Right>",{noremap = true,silent = true})
 -- 命令模式下上下
 map("c", "<D-j>", "<Down>")
 map("c", "<D-k>", "<Up>")
@@ -27,24 +27,24 @@ map("i", "jk", "<ESC>:!/opt/homebrew/bin/im-select com.apple.keylayout.ABC<CR>",
 map("i", "<ESC>", "<ESC>:!/opt/homebrew/bin/im-select com.apple.keylayout.ABC<CR>",{noremap = true,silent = true})
 
 -- 移动映射
-map("n", "j", "jzz")
-map("n", "k", "kzz")
-map("i", "<D-j>", "<Down>")
-map("i", "<D-k>", "<Up>")
-map("i", "<D-h>", "<Left>")
-map("i", "<D-l>", "<Right>")
-map("n", "<D-j>", "3<Down>")
-map("n", "<D-k>", "3<Up>")
-map("n", "<D-h>", "3<Left>")
-map("n", "<D-l>", "3<Right>")
-map("i", "<D-]>", "<ESC>2ea")
-map("i", "<D-[>", "<ESC>2gea")
-map("v", "<D-j>", "<Down>")
+map("n", "j", "jzz",{noremap = true,silent = true})
+map("n", "k", "kzz",{noremap = true,silent = true})
+map("i", "<D-j>", "<Down>",{noremap = true,silent = true})
+map("i", "<D-k>", "<Up>",{noremap = true,silent = true})
+map("i", "<D-h>", "<Left>",{noremap = true,silent = true})
+map("i", "<D-l>", "<Right>",{noremap = true,silent = true})
+map("n", "<D-j>", "3<Down>",{noremap = true,silent = true})
+map("n", "<D-k>", "3<Up>",{noremap = true,silent = true})
+map("n", "<D-h>", "3<Left>",{noremap = true,silent = true})
+map("n", "<D-l>", "3<Right>",{noremap = true,silent = true})
+map("i", "<D-]>", "<ESC>2ea",{noremap = true,silent = true})
+map("i", "<D-[>", "<ESC>2gea",{noremap = true,silent = true})
+map("v", "<D-j>", "<Down>",{noremap = true,silent = true})
 
-map("n", "K", "<C-b>")
-map("n", "J", "<C-f>")
-map("n", "H", "0")
-map("n", "L", "$")
+map("n", "K", "<C-u>",{noremap = true,silent = true})
+map("n", "J", "<C-f>",{noremap = true,silent = true})
+map("n", "H", "0",{noremap = true,silent = true})
+map("n", "L", "$",{noremap = true,silent = true})
 
 
 -- map("v", "<D-k>", "<Up>")
@@ -62,10 +62,10 @@ map("n", "L", "$")
 -- map("v", "<D-J>", "j")
 
 -- 向后删除
-map("i", "<D-backspace>", "<Right><backspace>")
+map("i", "<D-backspace>", "<Right><backspace>",{noremap = true,silent = true})
 
 -- 新建一行
-map("i", "<D-CR>", "<ESC>o")
+map("i", "<D-CR>", "<ESC>o",{noremap = true,silent = true})
 
 
 -- force write
@@ -76,11 +76,10 @@ map("n", "<D-s>", "<ESC>:w<CR>",{noremap = true,silent = true})
 -- map("n", "<D-q>", "<ESC>:wq<CR>")
 
 -- clear search
-map("n", "//", "<ESC>:noh<CR>")
-
+map("n", "//", "<ESC>:noh<CR>",{noremap = true,silent = true})
 
 -- New file
-map("n", "<leader>n", ":n ")
+map("n", "<leader>n", ":n ",{noremap = true,silent = true})
 -- open file
 map("n", "<D-o>", ':Triptych<CR>', { silent = true })
 map("n", "<D-O>", ":tcd ")
@@ -118,6 +117,13 @@ end
 -- map("i", "<D-{>", "<ESC><C-w>p")
 map("n", "<D-}>", "<ESC><C-w><C-w>",{silent=true})
 map("n", "<D-{>", "<ESC><C-w>p",{silent=true})
+map("n", "<leader>h","<C-w>h",{silent=true})
+map("n", "<leader>l","<C-w>l",{silent=true})
+map("n", "<leader>j","<C-w>j",{silent=true})
+map("n", "<leader>k","<C-w>k",{silent=true})
+map("n", "<leader>H", "<C-w>s",{silent=true})
+map("n", "<leader>V", "<C-w>v",{silent=true})
+map("n", "<leader>q","<C-w>q",{silent=true})
 
 -- comment
 map("n", "<D-/>", function()
@@ -133,7 +139,7 @@ map(
 
 -- nvimtree
 map("n", "<D-e>", "<cmd>NvimTreeToggle<CR>", { desc = "Nvimtree Toggle window" })
-map("n", "<D-E>", "<CMD>Telescope buffers<CR>")
+map("n", "<D-E>", "<CMD>Telescope find_files<CR>")
 
 -- terminal
 map("n", "<D-t>", function()
@@ -159,7 +165,7 @@ map("n", "<D-f>", function ()
 end)
 
 
-map("n", "<D-F>", "<CMD>Telescope live_grep<CR>")
+map("n", "<D-F>", "<CMD>Telescope live_grep<CR>",{noremap = true,silent = true})
 
 
 
@@ -172,35 +178,11 @@ map("n", "<D-Z>", "<CMD>:redo<CR>",{silent=true})
 -- copy and paste
 
 
-map("i", "<D-v>", function ()
-  -- 检查剪贴板内容是否为图片
-  local function is_clipboard_image()
-      -- 使用 pbpaste 获取剪贴板内容并存储在临时文件中
-      local tmp_file = "/tmp/nvim_clipboard_content"
-      os.execute('pbpaste > ' .. tmp_file)
-      -- 使用 file 命令检查文件类型
-      local handle = io.popen('file ' .. tmp_file)
-      local result = handle:read("*a")
-      handle:close()
-      -- 判断文件类型是否为图片
-      if result:match("text") then
-          return false
-      else
-          return true
-      end
-  end
+map("i", "<D-v>", "<C-r>+",{noremap = true,silent = true})
 
-  if is_clipboard_image() then
-    vim.cmd(":call mdip#MarkdownClipboardImage()")
-  else
-    vim.api.nvim_input("<ESC>p")
-  end
-
-end)
-
--- map("i", "<D-v>", "<C-r>+")
-map("n", "<D-v>", "<ESC>p")
-map("v", "<D-c>", "y")
+-- map("i", "<D-v>", "<C-r>+",{noremap = true,silent = true})
+map("n", "<D-v>", "<ESC>p",{noremap = true,silent = true})
+map("v", "<D-c>", "y",{noremap = true,silent = true})
 -- 显示 registers
 -- map("i","<D-r>","<CMD>lua require('telescope.builtin').registers(require('telescope.themes').get_cursor())<CR>")
 map("i", "<D-r>" , function ()
@@ -209,8 +191,8 @@ end)
 
 
 -- select all
-map("i", "<D-a>", "<ESC>ggVG")
-map("n", "<D-a>", "<ESC>ggVG")
+map("i", "<D-a>", "<ESC>ggVG",{noremap = true,silent = true})
+map("n", "<D-a>", "<ESC>ggVG",{noremap = true,silent = true})
 
 -- bookmark https://github.com/crusj/bookmarks.nvim
 map("n", "m", "<CMD>lua require'bookmarks'.add_bookmarks(true)<CR>")
@@ -222,6 +204,7 @@ map("n", "<D-r>", "<cmd>Telescope oldfiles<CR>", { desc = "Telescope Find oldfil
 
 -- Session
 map('n', '<D-R>', '<cmd>lua require("auto-session.session-lens").search_session()<CR>', { noremap = true, silent = true })
+map('n','<leader>tw', "<cmd>Telescope workspaces<CR>")
 
 -- MarkdownPreview
 -- map('n', "<F8>", "<ESC>:MarkdownPreview<CR>")
@@ -291,7 +274,7 @@ end, { noremap = true, silent = true }
 
 -- markdown image paste
 -- map("n", "<c-p>","<ESC>:call mdip#MarkdownClipboardImage()<CR><ESC>",{noremap = true,silent = true})
--- map("i", "<c-p>","<ESC>:call mdip#MarkdownClipboardImage()<CR><ESC>",{noremap = true,silent = true})
+map("i", "<c-p>","<ESC>:call mdip#MarkdownClipboardImage()<CR><ESC>",{noremap = true,silent = true})
 
 -- copilot.lua accept
 map("i", "<F12>", '<cmd>lua require("copilot.suggestion").accept()<CR>',{noremap = true,silent = true})
@@ -303,25 +286,39 @@ map("i", "<D-m>", '<cmd>lua require("copilot.suggestion").accept_word()<CR>',{no
 -- map("i", "jj", "<ESC>A$$<ESC>F$a",{noremap = true,silent = true})
 
 --flash jump
-map("i", "<D-g>", "<CMD>lua require('flash').jump()<CR>")
-map("n", "<D-g>", "<CMD>lua require('flash').jump()<CR>")
+map("i", "<D-g>", "<CMD>lua require('flash').jump()<CR>",{noremap = true,silent = true})
+map("n", "<D-g>", "<CMD>lua require('flash').jump()<CR>",{noremap = true,silent = true})
 
+
+-- Telescope lsp_defination
+map("n", "<leader>tgd", "<CMD>Telescope lsp_definitions<CR>",{noremap = true,silent = true})
+map("n", "<leader>tgr", "<CMD>Telescope lsp_references<CR>",{noremap = true,silent = true})
+vim.api.nvim_command("command! History :Telescope command_history")
+map("n", "?", "<CMD>Noice telescope<CR>")
+
+
+-- goto-preview
+map("n","gd","<cmd>lua require('goto-preview').goto_preview_definition()<CR>")
+map("n", "gr","<cmd>lua require('goto-preview').goto_preview_references()<CR>")
+---nnoremap gpd <cmd>lua require('goto-preview').goto_preview_definition()<CR>
+---nnoremap gpt <cmd>lua require('goto-preview').goto_preview_type_definition()<CR>
+---nnoremap gpi <cmd>lua require('goto-preview').goto_preview_implementation()<CR>
+---nnoremap gpD <cmd>lua require('goto-preview').goto_preview_declaration()<CR>
+---nnoremap gP <cmd>lua require('goto-preview').close_all_win()<CR>
+---nnoremap gpr <cmd>lua require('goto-preview').goto_preview_references()<CR>
 
 -- 一些个人设置
 map("n", "<leader>set", function ()
   local NvimTreeSize = 25
   vim.cmd("NvimTreeResize " .. NvimTreeSize)
+  vim.cmd("Copilot suggestion")
+  print(vim.cmd("Copilot status"))
   print("the NvimTree size is " .. NvimTreeSize)
 end)
 
 -- cmp 快捷键
 map("i", "<D-n>", "<C-n>")
 
--- Telescope lsp_defination
-map("n", "<leader>gd", "<CMD>Telescope lsp_definitions<CR>")
-map("n", "<leader>gr", "<CMD>Telescope lsp_references<CR>")
-vim.api.nvim_command("command! History :Telescope command_history")
-map("n", "?", "<CMD>Noice telescope<CR>")
-
+map("n", ",", "<C-o>")
 
 

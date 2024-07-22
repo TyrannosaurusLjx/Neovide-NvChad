@@ -94,4 +94,7 @@ vim.opt.undofile = true
 -- 设置 undo 文件目录
 vim.opt.undodir = os.getenv("HOME") .. "/.config/nvim/undodir"
 
+-- auto-session
+vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+
 end

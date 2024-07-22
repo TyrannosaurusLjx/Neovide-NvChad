@@ -55,11 +55,11 @@ return {
     lazy = false,
     config = function()
       local opts = {
-       auto_session_enable_last_session = false,
+       auto_session_enable_last_session = true,
        auto_session_root_dir = vim.fn.stdpath('data').."/sessions/",
        auto_session_enabled = true,
        auto_save_enabled = true,
-       auto_restore_enabled = false,
+       auto_restore_enabled = true,
        log_level = "error",
        auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/"},
      }
@@ -99,6 +99,9 @@ return {
     init = function()
       vim.g.mkdp_filetypes = { "markdown" }
       vim.g.mkdp_browser = "safari"
+      vim.g.mkdp_auto_close = 0
+      vim.g.mkdp_auto_start = 1
+      vim.g.mkdp_combine_preview = 1
     end,
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
     ft = { "markdown" },

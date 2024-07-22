@@ -119,11 +119,11 @@ return{
           },
 
           message = {
-            enabled =false,
+            enabled =true,
           },
 
           signature = {
-            enabled = false,
+            enabled = true,
           }
         },
 

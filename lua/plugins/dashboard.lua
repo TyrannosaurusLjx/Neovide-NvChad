@@ -37,11 +37,12 @@ return{
           { action = "Telescope find_files",                                     desc = " Find file",       icon = "♻︎ ", key = "f" },
           { action = "ene | startinsert",                                        desc = " New file",        icon = " ", key = "n" },
           { action = "Telescope oldfiles",                                       desc = " Recent files",    icon = " ", key = "r" },
-          { action = function() 
+          { action = function()
             require("auto-session.session-lens").search_session()
           end,
-          desc = " Workspace" , icon = "⚔︎ ", key = "g"},
-          -- { action = "LazyExtras",                                               desc = " Lazy Extras",     icon = " ", key = "x" },
+          desc = " Session" , icon = "⚔︎ ", key = "g"},
+          {action = "Telescope workspaces", desc = "Workspace", icon = "🎓 ", key = "p"},
+
           { action = "Lazy",                                                     desc = " Lazy",            icon = "󰒲 ", key = "l" },
           { action = "qa",                                                       desc = " Quit",            icon = " ", key = "q" },
         },
