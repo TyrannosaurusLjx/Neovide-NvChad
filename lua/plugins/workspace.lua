@@ -5,7 +5,7 @@ return{
      require("workspaces").setup({
       hooks = {
         open = {
-          "SessionRestore",
+          -- "SessionRestore",
           "NvimTreeToggle",
         }
       }

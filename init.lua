@@ -97,4 +97,7 @@ vim.opt.undodir = os.getenv("HOME") .. "/.config/nvim/undodir"
 -- auto-session
 vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
+-- 允许鼠标
+vim.o.mousemoveevent = true
+
 end

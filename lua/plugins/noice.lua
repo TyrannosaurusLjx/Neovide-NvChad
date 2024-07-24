@@ -118,9 +118,9 @@ return{
             enabled = false,
           },
 
-          message = {
-            enabled =true,
-          },
+          -- message = {
+          --   enabled =true,
+          -- },
 
           signature = {
             enabled = true,

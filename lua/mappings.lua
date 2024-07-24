@@ -88,7 +88,7 @@ map("n", "<D-O>", ":tcd ")
 -- map("i", "<D-w>", "<ESC>:bd<CR>")
 -- map("n", "<D-w>", "<ESC>:bd<CR>")
 -- map("i", "<D-w>", "<ESC>w<CR><CMD>lua require('bufdelete').bufdelete(0, true)<CR>",{noremap = true,silent = true})
-map("n", "<D-w>", "<ESC>w<CMD>lua require('bufdelete').bufdelete(0, true)<CR>",{noremap = true,silent = true})
+map("n", "<D-w>", "<ESC>w<CMD>lua require('bufdelete').bufdelete(0, true)<CR>")
 
 
 -- new window(tab)
