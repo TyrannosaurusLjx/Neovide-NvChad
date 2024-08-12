@@ -13,8 +13,8 @@ map("n", ";", ":", { desc = "CMD enter command mode" })
 -- https://stackoverflow.com/questions/3997078/how-to-paste-yanked-text-into-the-vim-command-line
 map("c", "<D-v>", "<C-r>+",{noremap = true,silent = true})
 -- 终端接受补全
-map("t", "<F12>", "<Right>",{noremap = true,silent = true})
-map("t", "<D-F12>", "<C-Right>",{noremap = true,silent = true})
+map("t", "<F12>", "<Right>")
+map("t", "<D-F12>", "<C-Right>")
 -- 命令模式下上下
 map("c", "<D-j>", "<Down>")
 map("c", "<D-k>", "<Up>")
