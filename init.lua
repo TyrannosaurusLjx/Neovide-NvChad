@@ -41,9 +41,9 @@ end)
 
 -- 预配置
 vim.cmd [[
-  set guifont=Hack\ Nerd\ Font\ Mono:h15
+  set guifont=Hack\ Nerd\ Font\ Mono:h16
 ]]
 vim.cmd [[
-  set scrolloff=15
+  set scrolloff=18
 ]]
 
