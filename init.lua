@@ -47,3 +47,4 @@ vim.cmd [[
   set scrolloff=18
 ]]
 
+vim.g.copilot_filetypes = {markdown = true}

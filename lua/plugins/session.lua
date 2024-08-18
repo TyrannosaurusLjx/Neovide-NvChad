@@ -12,7 +12,7 @@ return{
   -- }
   {
     'rmagatti/auto-session',
-    lazy = false,
+    lazy = true,
     config = function()
       local opts = {
        auto_session_enable_last_session = true,
