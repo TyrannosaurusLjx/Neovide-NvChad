@@ -44,7 +44,8 @@ vim.cmd [[
   set guifont=Hack\ Nerd\ Font\ Mono:h16
 ]]
 vim.cmd [[
-  set scrolloff=18
+  set scrolloff=5
 ]]
 
 vim.g.copilot_filetypes = {markdown = true}
+
