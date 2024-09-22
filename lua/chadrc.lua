@@ -5,7 +5,7 @@
 local M = {}
 
 M.base46 = {
-	theme = "everforest",
+	theme = "onenord",
 
 	-- hl_override = {
 	-- 	Comment = { italic = true },
@@ -40,7 +40,7 @@ M.copilot = {
 --重写 
 M.ui = {
   nvdash = {
-    load_on_startup = true,
+    load_on_startup = false,
     buttons = {
       { "  Find File", "Spc f f", "Telescope find_files" },
       { "󰈚  Recent Files", "Spc f o", "Telescope oldfiles" },

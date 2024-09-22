@@ -9,7 +9,7 @@ map("i", "jk", "<ESC>")
 
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 
--- buffer 管理
+-- buffer 管理y
 map("n", "<D-w>", "<CMD>lua require('bufdelete').bufdelete(0, true)<CR>")
 
 for i = 1, 9, 1 do
@@ -29,11 +29,15 @@ map("n", "<tab>", "jzz")
 --markdown 
 map("n", "<leader>mp", "<CMD>call mdip#MarkdownClipboardImage()<CR>")
 
+map("n", "<D-a>", "<CMD>AerialToggle<CR>")
 
 -- 文件搜索等
 map("n", "<D-F>", "<CMD>Telescope live_grep<CR>",{noremap = true,silent = true})
 map("n", "<D-E>", "<CMD>Telescope find_files<CR>")
 map("n", "<D-f>", "<CMD>Telescope current_buffer_fuzzy_find<CR>")
+
+-- 取消搜索高亮
+map("n", "//", "<CMD>nohl<CR>")
 
 -- 匹配
 map("i", "<D-n>", "<C-p>")
@@ -82,12 +86,25 @@ map({"i", "c"}, "<D-l>", "<Right>")
 map({"n", "v"}, "J" , "<C-d>" )
 map({"n", "v"}, "K" , "<C-u>" )
 
+map({"n"}, "L", "$")
+map({"n"}, "H", "^")
+
 
 -- 类vscode 按键
-map({"i", "n"}, "<D-s>", "<CMD>w<CR><ESC>")
+map({"i", "n"}, "<D-s>", function ()
+  if vim.bo.filetype == "tex" then
+    vim.cmd("w")
+    vim.cmd("silent !xelatex %")
+  else
+    vim.cmd("w")
+  end
+  
+  vim.api.nvim_input('<ESC>')
+
+end)
 
 -- bookmark
-map("n", "<leader>ml", "<CMD>Telescope bookmarks<CR>" )
+map("n", "<leader>ml", "<CMD>lua require'bookmarks'.toggle_bookmarks()<CR>" )
 map("n", "<leader>mm", "<CMD>lua require'bookmarks'.add_bookmarks(true)<CR>")
 -- map("n", "<leader>ml", "<CMD>lua require'bookmarks'.toggle_bookmarks()<CR>")
 
@@ -117,10 +134,26 @@ end)
 -- session 最近打开的项目
 map("n", "<D-R>", "<CMD>Telescope session-lens<CR>")
 
+-- <F8>
+map("n", "<F8>", "", {
+  noremap = true,
+  silent = true,
+  callback = function()
+    -- 如果是 markdown 文件
+    if vim.bo.filetype == "markdown" then
+      vim.cmd("MarkdownPreview")
+    elseif vim.bo.filetype == "tex" then
+      -- 运行 xelatex
+      vim.cmd("silent !xelatex % &")
+    else
+      print("不支持的文件类型")
+    end
+  end
+})
 
 -- 复制粘贴
 map({"n", "v"}, "<D-c>", '"+y')
-map({"n", "c"}, "<D-v>", "<C-r>+")
+map({"n", "c", "i"}, "<D-v>", "<C-r>+")
 
 
 -- terminal
@@ -146,3 +179,7 @@ map("n", "?", function ()
   -- 打印内容
   vim.cmd("edit " .. file)
 end)
+
+
+
+
