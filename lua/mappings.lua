@@ -72,7 +72,14 @@ map("n", "<leader>h", "<C-w>h")
 map("n", "<leader>j", "<C-w>j")
 map("n", "<leader>k", "<C-w>k")
 map("n", "<leader>l", "<C-w>l")
-
+map("n", "<D-h>", "<C-w>h")
+map("n", "<D-j>", "<C-w>j")
+map("n", "<D-k>", "<C-w>k")
+map("n", "<D-l>", "<C-w>l")
+map("n", "<D-L>","<CMD>:vsplit<CR><CMD>Telescope buffers<CR>")
+map("n", "<D-H>","<CMD>:vsplit<CR><C-w>h<CMD>Telescope buffers<CR>")
+map("n", "<D-J>","<CMD>:split<CR><CMD>Telescope buffers<CR>")
+map("n", "<D-K>","<CMD>:split<CR><C-w>k<CMD>Telescope buffers<CR>")
 
 -- 终端
 -- map("n", {"<C-`>", "<D-t>"}, "<CMD>")
@@ -182,4 +189,7 @@ end)
 
 
 
-
+--rename
+map("n", "<leader>rn", function()
+  return ":IncRename " .. vim.fn.expand("<cword>")
+end, { expr = true })

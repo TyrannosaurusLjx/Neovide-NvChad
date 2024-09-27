@@ -1,0 +1,108 @@
+vim.g.mapleader = " " -- 设置leader键
+
+local map = vim.keymap.set -- 设置键盘映射
+
+--设置 lazy
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+  if vim.v.shell_error ~= 0 then
+    vim.api.nvim_echo({
+      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+      { out, "WarningMsg" },
+      { "\nPress any key to exit..." },
+    }, true, {})
+    vim.fn.getchar()
+    os.exit(1)
+  end
+end
+vim.opt.rtp:prepend(lazypath)
+
+-- 在这里继续添加其他插件和配置
+require("lazy").setup({
+
+-- surround
+  {
+      "kylechui/nvim-surround",
+      version = "*", -- Use for stability; omit to use `main` branch for the latest features
+      event = "VeryLazy",
+      config = function()
+          require("nvim-surround").setup({
+              -- Configuration here, or leave empty to use defaults
+          })
+      end
+  },
+
+-- telescope
+  {
+  'nvim-telescope/telescope.nvim', tag = '0.1.8',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+  },
+
+-- flash
+  {
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    opts = {},
+  },
+
+--
+
+
+})
+
+--- neovim-ui
+vim.api.nvim_exec([[
+    " THEME CHANGER
+    function! SetCursorLineNrColorInsert(mode)
+        " Insert mode: blue
+        if a:mode == "i"
+            call VSCodeNotify('nvim-theme.insert')
+
+        " Replace mode: red
+        elseif a:mode == "r"
+            call VSCodeNotify('nvim-theme.replace')
+        endif
+    endfunction
+
+    augroup CursorLineNrColorSwap
+        autocmd!
+        autocmd ModeChanged *:[vV\x16]* call VSCodeNotify('nvim-theme.visual')
+        autocmd ModeChanged *:[R]* call VSCodeNotify('nvim-theme.replace')
+        autocmd InsertEnter * call SetCursorLineNrColorInsert(v:insertmode)
+        autocmd InsertLeave * call VSCodeNotify('nvim-theme.normal')
+        autocmd CursorHold * call VSCodeNotify('nvim-theme.normal')
+        autocmd ModeChanged [vV\x16]*:* call VSCodeNotify('nvim-theme.normal')
+    augroup END
+]], false)
+
+
+-- 键盘映射
+
+-- flash
+map({ "n", "x", "o" }, "s", "<CMD>lua require('flash').jump() <CR>", {desc = "Flash" })
+map({ "n", "x", "o" }, "S" ,"<CMD>lua require('flash').treesitter() <CR>" , {desc = "Flash Treesitter"} )
+
+--移动
+map({"n", "v"}, "J" , "<C-d>" )
+map({"n", "v"}, "K" , "<C-u>" )
+map({"n"}, "L", "$")
+map({"n"}, "H", "^")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

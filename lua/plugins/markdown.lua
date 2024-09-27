@@ -26,6 +26,7 @@ return{
       config = function()
           require('render-markdown').setup({
             render_modes = { 'n', 'c' , 'i' },
+            enabled = not vim.g.vscode -- 在 vscode 中使用会渲染的很奇怪
       })
       end,
   }
