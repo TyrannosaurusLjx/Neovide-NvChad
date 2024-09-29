@@ -46,7 +46,21 @@ require("lazy").setup({
     event = "VeryLazy",
     opts = {},
   },
-
+  {
+    "rainzm/flash-zh.nvim",
+    event = "VeryLazy",
+    dependencies = "folke/flash.nvim",
+    keys = {{
+        "s",
+        mode = {"n", "x", "o"},
+        function()
+            require("flash-zh").jump({
+                chinese_only = false
+            })
+        end,
+        desc = "Flash between Chinese"
+    }}
+  },
 --
 
 
@@ -77,6 +91,8 @@ vim.api.nvim_exec([[
     augroup END
 ]], false)
 
+--设置系统剪切板和 neovim 剪切板同步
+vim.opt.clipboard = "unnamedplus"
 
 -- 键盘映射
 
