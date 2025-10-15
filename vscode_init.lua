@@ -56,6 +56,50 @@ require("lazy").setup({
   {
     "monaqa/dial.nvim",
   },
+
+    --------------- Treesitter & Text Objects ---------------
+    {
+        -- 核心依赖：nvim-treesitter
+        "nvim-treesitter/nvim-treesitter",
+        -- 启用/配置 Text Objects 的关键步骤
+        build = ":TSUpdate", -- 确保安装解析器
+        config = function()
+            require("nvim-treesitter.configs").setup {
+                -- 确保安装了您需要的语言解析器
+                ensure_installed = { "c", "lua", "javascript", "typescript", "python", "html", "css", "vim" },
+                highlight = { enable = true },
+                indent = { enable = true },
+                -- 添加 Treesitter Text Objects 配置
+                textobjects = {
+                    select = {
+                        enable = true,
+                        lookahead = true,
+                        keymaps = {
+                            -- 映射：vaf 选中整个函数，vif 选中函数内部
+                            ['af'] = '@function.outer',
+                            ['if'] = '@function.inner',
+                            ['ac'] = '@class.outer',
+                            ['ic'] = '@class.inner',
+                        },
+                    },
+                    -- 确保 Text Objects 的重复移动也启用
+                    move = {
+                        enable = true,
+                        set_jumps = true,
+                        goto_next_start = { ["]f"] = "@function.outer", ["]]"] = "@class.outer" },
+                        goto_next_end = { ["]F"] = "@function.outer", ["]["] = "@class.outer" },
+                        goto_previous_start = { ["[f"] = "@function.outer", ["[["] = "@class.outer" },
+                        goto_previous_end = { ["[F"] = "@function.outer", ["[]"] = "@class.outer" },
+                    },
+                },
+            }
+        end,
+    },
+    
+    {
+        -- Text Objects 扩展
+        "nvim-treesitter/nvim-treesitter-textobjects",
+    },
 })
 
 ----------options----------
@@ -96,8 +140,8 @@ map("n", "-", function()
 end)
 map("n", "<enter>", "ciw")
 
-keymap("n", "<leader>nT", "foam-vscode.open-daily-note-for-date")
-keymap("n", "<leader>nt", "foam-vscode.open-daily-note")
+-- keymap("n", "<leader>nT", "foam-vscode.open-daily-note-for-date")
+-- keymap("n", "<leader>nt", "foam-vscode.open-daily-note")
 keymap("n", "<leader>nf", "workbench.action.quickOpen")
 keymap("n", "zM", "editor.foldAll")
 keymap("n", "zR", "editor.unfoldAll")
@@ -110,3 +154,20 @@ keymap("n", "<leader>ff", "workbench.action.quickTextSearch")
 keymap("n", "<leader>fF", "workbench.action.findInFiles")
 keymap("n", "<leader>fo", "workbench.action.openRecent")
 keymap("n", "<leader>bb", "workbench.action.openPreviousRecentlyUsedEditor")
+
+
+local ts_repeat_move = require "nvim-treesitter.textobjects.repeatable_move"
+-- Repeat movement with ; and ,
+-- ensure ; goes forward and , goes backward regardless of the last direction
+vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move_next)
+vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_previous)
+
+-- vim way: ; goes to the direction you were moving.
+-- vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move)
+-- vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_opposite)
+
+-- Optionally, make builtin f, F, t, T also repeatable with ; and ,
+vim.keymap.set({ "n", "x", "o" }, "f", ts_repeat_move.builtin_f_expr, { expr = true })
+vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F_expr, { expr = true })
+vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr, { expr = true })
+vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true })
